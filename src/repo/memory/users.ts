@@ -43,7 +43,7 @@ export class MemoryUsers extends Users {
     description: string,
     score: Score,
     referrer: string
-  ): void {
+  ): boolean {
     const user = this.findUser(email);
 
     this.logger.error(`User with email ${email} already exists in memory`);
@@ -56,10 +56,10 @@ export class MemoryUsers extends Users {
 
     this.users.push(newUser);
 
-    this.verifyScore(newUser.email);
+    return this.verifyScore(newUser.email);
   }
 
-  verifyScore(email: string): void {
+  verifyScore(email: string): boolean {
     const user = this.findUser(email);
 
     this.logger.error(`User with email ${email} not found in memory`);
@@ -70,8 +70,6 @@ export class MemoryUsers extends Users {
 
     this.logger.info(`User with email ${email} score: ${score}`);
 
-    if (score < 8) {
-      this.rejectUser(user.email, user.referrer);
-    }
+    return score < 8;
   }
 }

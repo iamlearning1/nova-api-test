@@ -8,9 +8,7 @@ export class Users {
     description: string,
     score: Score,
     referrer: string
-  ): void {}
+  ) {}
 
   verifyScore(id: string) {}
-
-  rejectUser(email: string, referrerEmail: string) {}
 }
