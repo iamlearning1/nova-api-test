@@ -6,6 +6,7 @@ import cors from 'cors';
 
 import container from './container';
 import nominate from './nomination/controller';
+import users from './users/controller';
 import { errorHandler } from './middleware/error-handler';
 
 const { PORT = 3000 } = process.env;
@@ -16,7 +17,8 @@ app.use(express.json());
 
 app.use(cors());
 
-app.use('/api', nominate);
+app.use('/api/nomination', nominate);
+app.use('/api/users', users);
 
 app.use(errorHandler);
 

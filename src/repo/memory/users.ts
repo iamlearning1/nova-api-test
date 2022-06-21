@@ -2,25 +2,7 @@ import container from '../../container';
 import { Score, User } from '../../entity/User';
 import { Users } from '../../entity/Users';
 import { BadRequest, NotFound } from '../../errors';
-
-const normalUser = new User(
-  'testuser@test.com',
-  '5 Years experience in Full Stack Development',
-  { community: 8, talent: 8 },
-  'admin@test.com'
-);
-
-const adminUser = new User(
-  'admin@test.com',
-  'Admin User',
-  {
-    community: 9,
-    talent: 9,
-  },
-  'admin@test.com'
-);
-
-adminUser.makeAdmin();
+import { fillUsersInMemory } from './utils';
 
 export class MemoryUsers extends Users {
   users: User[];
@@ -29,7 +11,7 @@ export class MemoryUsers extends Users {
   constructor() {
     super();
 
-    this.users = [normalUser, adminUser];
+    this.users = [...fillUsersInMemory()];
   }
 
   findUser(email: string): User | undefined {
@@ -71,5 +53,9 @@ export class MemoryUsers extends Users {
     this.logger.info(`User with email ${email} score: ${score}`);
 
     return score < 8;
+  }
+
+  allUsers(): User[] {
+    return this.users;
   }
 }

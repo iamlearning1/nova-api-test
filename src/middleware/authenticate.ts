@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 
 import container from '../container';
+import { User } from '../entity/User';
 
 declare global {
   namespace Express {
     interface Request {
       referrer: string;
+      user: User;
     }
   }
 }
@@ -19,13 +21,15 @@ export const isAuthenticated = (
 
   if (!email) return res.sendStatus(403);
 
-  const usersService = container.resolve('userService');
+  const usersService = container.resolve('usersService');
 
   const user = usersService.findUser(email);
 
   if (!user) return res.sendStatus(403);
 
   req.referrer = user.email;
+
+  req.user = user;
 
   next();
 };

@@ -14,3 +14,10 @@ export class NotFound extends Error {
     this.name = 'NotFound';
   }
 }
+
+export class Unauthorized extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'Unauthorized';
+  }
+}

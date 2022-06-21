@@ -1,4 +1,4 @@
-import { Score } from './User';
+import { Score, User } from './User';
 
 export class Users {
   findUser(email: string) {}
@@ -11,4 +11,6 @@ export class Users {
   ) {}
 
   verifyScore(id: string) {}
+
+  allUsers(user: User) {}
 }

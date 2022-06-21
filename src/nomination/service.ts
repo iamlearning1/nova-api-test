@@ -2,7 +2,7 @@ import { EmailService } from '../email/service';
 import { MemoryUsers } from '../repo/memory/users';
 import { Score } from '../entity/User';
 
-export class UserService {
+export class NominationService {
   usersRepo: MemoryUsers;
   emailService: EmailService;
 
@@ -15,10 +15,6 @@ export class UserService {
   }) {
     this.usersRepo = usersRepo;
     this.emailService = emailService;
-  }
-
-  findUser(email: string) {
-    return this.usersRepo.findUser(email);
   }
 
   saveUser(email: string, description: string, score: Score, referrer: string) {
